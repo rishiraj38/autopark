@@ -1,0 +1,202 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum VehicleType {
+  CAR
+  MOTORCYCLE
+  TRUCK
+  ELECTRIC
+}
+
+enum SlotType {
+  COMPACT
+  REGULAR
+  LARGE
+  HANDICAPPED
+  ELECTRIC_CHARGING
+}
+
+enum SlotStatus {
+  AVAILABLE
+  OCCUPIED
+  RESERVED
+  MAINTENANCE
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+  EXPIRED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  DEBIT_CARD
+  UPI
+  WALLET
+}
+
+enum NotificationType {
+  BOOKING_CONFIRMED
+  BOOKING_CANCELLED
+  VEHICLE_ENTERED
+  VEHICLE_EXITED
+  PAYMENT_SUCCESS
+  PAYMENT_FAILED
+  SLOT_AVAILABLE
+  BOOKING_EXPIRING
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  passwordHash  String
+  firstName     String
+  lastName      String
+  phone         String?
+  role          Role           @default(USER)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  vehicles      Vehicle[]
+  bookings      Booking[]
+  payments      Payment[]
+  notifications Notification[]
+
+  @@map("users")
+}
+
+model Vehicle {
+  id            String         @id @default(uuid())
+  licensePlate  String         @unique
+  type          VehicleType
+  make          String?
+  model         String?
+  color         String?
+  ownerId       String
+  owner         User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  bookings      Booking[]
+  entryExitLogs EntryExitLog[]
+
+  @@map("vehicles")
+}
+
+model ParkingFloor {
+  id        String        @id @default(uuid())
+  name      String
+  level     Int
+  capacity  Int
+  createdAt DateTime      @default(now())
+  slots     ParkingSlot[]
+
+  @@map("parking_floors")
+}
+
+model ParkingSlot {
+  id                String         @id @default(uuid())
+  slotNumber        String         @unique
+  type              SlotType
+  status            SlotStatus     @default(AVAILABLE)
+  floorId           String
+  floor             ParkingFloor   @relation(fields: [floorId], references: [id])
+  pricePerHour      Decimal        @db.Decimal(10, 2)
+  distanceFromEntry Int            @default(0)
+  isActive          Boolean        @default(true)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  bookings          Booking[]
+  entryExitLogs     EntryExitLog[]
+
+  @@map("parking_slots")
+}
+
+model Booking {
+  id           String        @id @default(uuid())
+  userId       String
+  user         User          @relation(fields: [userId], references: [id])
+  vehicleId    String
+  vehicle      Vehicle       @relation(fields: [vehicleId], references: [id])
+  slotId       String
+  slot         ParkingSlot   @relation(fields: [slotId], references: [id])
+  status       BookingStatus @default(PENDING)
+  startTime    DateTime
+  endTime      DateTime
+  actualEntry  DateTime?
+  actualExit   DateTime?
+  totalAmount  Decimal?      @db.Decimal(10, 2)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  payment      Payment?
+  entryExitLog EntryExitLog?
+
+  @@map("bookings")
+}
+
+model Payment {
+  id            String        @id @default(uuid())
+  bookingId     String        @unique
+  booking       Booking       @relation(fields: [bookingId], references: [id])
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+  amount        Decimal       @db.Decimal(10, 2)
+  method        PaymentMethod
+  status        PaymentStatus @default(PENDING)
+  transactionId String?
+  paidAt        DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@map("payments")
+}
+
+model EntryExitLog {
+  id        String      @id @default(uuid())
+  vehicleId String
+  vehicle   Vehicle     @relation(fields: [vehicleId], references: [id])
+  slotId    String
+  slot      ParkingSlot @relation(fields: [slotId], references: [id])
+  bookingId String?     @unique
+  booking   Booking?    @relation(fields: [bookingId], references: [id])
+  entryTime DateTime    @default(now())
+  exitTime  DateTime?
+  createdAt DateTime    @default(now())
+
+  @@map("entry_exit_logs")
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType
+  title     String
+  message   String
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  @@map("notifications")
+}
