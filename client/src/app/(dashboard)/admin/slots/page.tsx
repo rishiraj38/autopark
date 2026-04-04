@@ -57,7 +57,7 @@ export default function AdminSlotsPage() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Manage Parking Slots</h1>
         <div className="flex gap-2">
-          <button onClick={() => setShowFloorForm(!showFloorForm)} className="flex items-center gap-2 px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50">
+          <button onClick={() => setShowFloorForm(!showFloorForm)} className="flex items-center gap-2 px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 bg-white text-gray-900">
             <Plus className="w-4 h-4" /> Add Floor
           </button>
           <button onClick={() => setShowSlotForm(!showSlotForm)} className="flex items-center gap-2 px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">
@@ -70,7 +70,7 @@ export default function AdminSlotsPage() {
         <form onSubmit={createFloor} className="bg-white rounded-xl border p-6 mb-6 flex gap-4 items-end">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-            <input type="text" value={floorForm.name} onChange={(e) => setFloorForm((f) => ({ ...f, name: e.target.value }))} className="px-4 py-2 border rounded-lg" required />
+            <input type="text" value={floorForm.name} onChange={(e) => setFloorForm((f) => ({ ...f, name: e.target.value }))} className="px-4 py-2 border rounded-lg bg-white text-gray-900" required />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Level</label>
@@ -88,18 +88,18 @@ export default function AdminSlotsPage() {
         <form onSubmit={createSlot} className="bg-white rounded-xl border p-6 mb-6 flex flex-wrap gap-4 items-end">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Slot Number</label>
-            <input type="text" value={slotForm.slotNumber} onChange={(e) => setSlotForm((f) => ({ ...f, slotNumber: e.target.value }))} className="px-4 py-2 border rounded-lg" required />
+            <input type="text" value={slotForm.slotNumber} onChange={(e) => setSlotForm((f) => ({ ...f, slotNumber: e.target.value }))} className="px-4 py-2 border rounded-lg bg-white text-gray-900" required />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Floor</label>
-            <select value={slotForm.floorId} onChange={(e) => setSlotForm((f) => ({ ...f, floorId: e.target.value }))} className="px-4 py-2 border rounded-lg" required>
+            <select value={slotForm.floorId} onChange={(e) => setSlotForm((f) => ({ ...f, floorId: e.target.value }))} className="px-4 py-2 border rounded-lg bg-white text-gray-900" required>
               <option value="">Select</option>
               {floors.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}
             </select>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
-            <select value={slotForm.type} onChange={(e) => setSlotForm((f) => ({ ...f, type: e.target.value }))} className="px-4 py-2 border rounded-lg">
+            <select value={slotForm.type} onChange={(e) => setSlotForm((f) => ({ ...f, type: e.target.value }))} className="px-4 py-2 border rounded-lg bg-white text-gray-900">
               <option value="COMPACT">Compact</option>
               <option value="REGULAR">Regular</option>
               <option value="LARGE">Large</option>
@@ -130,7 +130,7 @@ export default function AdminSlotsPage() {
           <tbody className="divide-y divide-gray-200">
             {slots.map((slot) => (
               <tr key={slot.id}>
-                <td className="px-6 py-4 text-sm font-medium">{slot.slotNumber}</td>
+                <td className="px-6 py-4 text-sm font-medium text-gray-900">{slot.slotNumber}</td>
                 <td className="px-6 py-4 text-sm text-gray-500">{slot.type}</td>
                 <td className="px-6 py-4 text-sm text-gray-500">{slot.floorName}</td>
                 <td className="px-6 py-4 text-sm text-gray-500">${slot.pricePerHour}</td>
@@ -143,7 +143,7 @@ export default function AdminSlotsPage() {
                   <select
                     value={slot.status}
                     onChange={(e) => updateStatus(slot.id, e.target.value)}
-                    className="text-xs border rounded px-2 py-1"
+                    className="text-xs border rounded px-2 py-1 bg-white text-gray-900"
                   >
                     <option value="AVAILABLE">Available</option>
                     <option value="MAINTENANCE">Maintenance</option>

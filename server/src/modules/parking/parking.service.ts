@@ -1,6 +1,6 @@
 import { SlotStatus, SlotType, VehicleType } from '../../core/types/enums';
 import { IParkingStrategy } from '../../core/interfaces/IParkingStrategy';
-import { NotFoundError } from '../../core/errors/NotFoundError';
+import { ValidationError } from '../../core/errors/ValidationError';
 import { VehicleFactory } from '../vehicle/vehicle.factory';
 import { NearestSlotStrategy } from './strategies/NearestSlotStrategy';
 import { CheapestSlotStrategy } from './strategies/CheapestSlotStrategy';
@@ -98,7 +98,7 @@ export class ParkingService {
     const chosen = this.strategy.allocate(availableSlots);
 
     if (!chosen) {
-      throw new NotFoundError('ParkingSlot', `available for ${vehicleType}`);
+      throw new ValidationError(`No available parking slots for vehicle type ${vehicleType}. Please try a different strategy or check back later.`);
     }
 
     return {

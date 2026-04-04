@@ -20,11 +20,11 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
   if (isLoading || !user) return <LoadingSpinner />;
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-gray-100">
       <Sidebar />
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
         <Topbar />
-        <main className="flex-1 p-6 overflow-auto">
+        <main className="flex-1 p-6 overflow-auto bg-gray-100 text-gray-900">
           {children}
         </main>
       </div>

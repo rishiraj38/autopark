@@ -66,7 +66,7 @@ export default function AdminUsersPage() {
                   <select
                     value={u.role}
                     onChange={(e) => updateRole(u.id, e.target.value)}
-                    className="text-xs border rounded px-2 py-1"
+                    className="text-xs border rounded px-2 py-1 bg-white text-gray-900"
                   >
                     <option value="USER">User</option>
                     <option value="ADMIN">Admin</option>

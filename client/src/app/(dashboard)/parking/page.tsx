@@ -49,7 +49,7 @@ export default function ParkingPage() {
         <select
           value={selectedFloor}
           onChange={(e) => setSelectedFloor(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-lg text-sm"
+          className="px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white text-gray-900"
         >
           <option value="">All Floors</option>
           {floors.map((f) => (
@@ -59,7 +59,7 @@ export default function ParkingPage() {
         <select
           value={selectedType}
           onChange={(e) => setSelectedType(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-lg text-sm"
+          className="px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white text-gray-900"
         >
           <option value="">All Types</option>
           <option value="COMPACT">Compact</option>

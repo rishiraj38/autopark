@@ -12,7 +12,6 @@ import {
   Bell,
   Users,
   BarChart3,
-  Settings,
   LogOut,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -90,7 +89,7 @@ export default function Sidebar() {
             {user?.firstName?.[0]}{user?.lastName?.[0]}
           </div>
           <div>
-            <p className="text-sm font-medium">{user?.firstName} {user?.lastName}</p>
+            <p className="text-sm font-medium text-white">{user?.firstName} {user?.lastName}</p>
             <p className="text-xs text-gray-400">{user?.role}</p>
           </div>
         </div>

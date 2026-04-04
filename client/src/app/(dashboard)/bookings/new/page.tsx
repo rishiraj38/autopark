@@ -64,7 +64,7 @@ export default function NewBookingPage() {
           <select
             value={form.vehicleId}
             onChange={(e) => setForm((f) => ({ ...f, vehicleId: e.target.value }))}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900"
             required
           >
             <option value="">Select a vehicle</option>
@@ -83,7 +83,7 @@ export default function NewBookingPage() {
             <select
               value={form.strategy}
               onChange={(e) => setForm((f) => ({ ...f, strategy: e.target.value }))}
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900"
             >
               <option value="nearest">Nearest to Entry</option>
               <option value="cheapest">Cheapest Price</option>
@@ -112,7 +112,7 @@ export default function NewBookingPage() {
               type="datetime-local"
               value={form.startTime}
               onChange={(e) => setForm((f) => ({ ...f, startTime: e.target.value }))}
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900"
               required
             />
           </div>
@@ -122,7 +122,7 @@ export default function NewBookingPage() {
               type="datetime-local"
               value={form.endTime}
               onChange={(e) => setForm((f) => ({ ...f, endTime: e.target.value }))}
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900"
               required
             />
           </div>

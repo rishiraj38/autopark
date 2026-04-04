@@ -67,12 +67,12 @@ export default function VehiclesPage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">License Plate</label>
               <input type="text" value={form.licensePlate} onChange={(e) => setForm((f) => ({ ...f, licensePlate: e.target.value }))}
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg" required />
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900" required />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
               <select value={form.type} onChange={(e) => setForm((f) => ({ ...f, type: e.target.value }))}
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg">
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900">
                 <option value="CAR">Car</option>
                 <option value="MOTORCYCLE">Motorcycle</option>
                 <option value="TRUCK">Truck</option>
@@ -82,17 +82,17 @@ export default function VehiclesPage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Make</label>
               <input type="text" value={form.make} onChange={(e) => setForm((f) => ({ ...f, make: e.target.value }))}
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg" />
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Model</label>
               <input type="text" value={form.model} onChange={(e) => setForm((f) => ({ ...f, model: e.target.value }))}
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg" />
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Color</label>
               <input type="text" value={form.color} onChange={(e) => setForm((f) => ({ ...f, color: e.target.value }))}
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg" />
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900" />
             </div>
           </div>
           <div className="flex gap-3">
