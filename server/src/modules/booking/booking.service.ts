@@ -139,7 +139,7 @@ export class BookingService {
 
     const prisma = DatabaseConnection.getInstance().getClient();
 
-    const updated = await prisma.$transaction(async (tx) => {
+    const updated = await prisma.$transaction(async (tx: any) => {
       const updatedBooking = await tx.booking.update({
         where: { id },
         data: { status: BookingStatus.CANCELLED },
@@ -193,7 +193,7 @@ export class BookingService {
           entryTime: now,
         },
       }),
-    ]);
+    ] as any);
 
     await this.notificationService.notify({
       userId: booking.userId,
@@ -240,7 +240,7 @@ export class BookingService {
         where: { bookingId: booking.id, exitTime: null },
         data: { exitTime: now },
       }),
-    ]);
+    ] as any);
 
     await this.notificationService.notify({
       userId: booking.userId,
