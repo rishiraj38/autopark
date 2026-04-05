@@ -101,7 +101,8 @@ export class ParkingService {
       throw new ValidationError(`No available parking slots for vehicle type ${vehicleType}. Please try a different strategy or check back later.`);
     }
 
-    return ParkingMapper.slotToDTO(chosen);
+    const slot = await this.slotRepo.findByIdOrThrow(chosen.id);
+    return ParkingMapper.slotToDTO(slot);
   }
 
   async getAvailableSlots(vehicleType?: VehicleType): Promise<ParkingSlotResponseDTO[]> {
