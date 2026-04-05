@@ -1,4 +1,4 @@
-import { BookingStatus, SlotStatus, VehicleType } from '../../core/types/enums';
+import { BookingStatus, SlotStatus, VehicleType, PaymentStatus } from '../../core/types/enums';
 import { NotFoundError } from '../../core/errors/NotFoundError';
 import { ConflictError } from '../../core/errors/ConflictError';
 import { ValidationError } from '../../core/errors/ValidationError';
@@ -211,6 +211,11 @@ export class BookingService {
 
     if (booking.status !== BookingStatus.ACTIVE) {
       throw new ValidationError('Only active bookings can be checked out');
+    }
+
+    // Verify payment is completed before checkout
+    if (booking.payment?.status !== PaymentStatus.COMPLETED) {
+      throw new ValidationError('Payment must be completed before checkout. Please process your payment first.');
     }
 
     const prisma = DatabaseConnection.getInstance().getClient();
