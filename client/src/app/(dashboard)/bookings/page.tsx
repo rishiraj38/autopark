@@ -28,7 +28,7 @@ export default function BookingsPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">My Bookings</h1>
-        <Link href="/bookings/new" className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+        <Link href="/bookings/new" className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer">
           <Plus className="w-4 h-4" /> New Booking
         </Link>
       </div>
@@ -62,16 +62,16 @@ export default function BookingsPage() {
                 <div className="flex gap-2">
                   {booking.status === 'CONFIRMED' && (
                     <>
-                      <button onClick={() => handleAction(booking.id, 'checkin')} className="px-3 py-1.5 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700">
+                      <button onClick={() => handleAction(booking.id, 'checkin')} className="px-3 py-1.5 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700 cursor-pointer">
                         Check In
                       </button>
-                      <button onClick={() => handleAction(booking.id, 'cancel')} className="px-3 py-1.5 text-xs bg-red-100 text-red-700 rounded-lg hover:bg-red-200">
+                      <button onClick={() => handleAction(booking.id, 'cancel')} className="px-3 py-1.5 text-xs bg-red-100 text-red-700 rounded-lg hover:bg-red-200 cursor-pointer">
                         Cancel
                       </button>
                     </>
                   )}
                   {booking.status === 'ACTIVE' && (
-                    <button onClick={() => handleAction(booking.id, 'checkout')} className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    <button onClick={() => handleAction(booking.id, 'checkout')} className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer">
                       Check Out
                     </button>
                   )}
